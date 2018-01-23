@@ -3,7 +3,7 @@ import pandas as pd
 import jieba
 
 jieba.setLogLevel('WARN')
-def sentence_transform(train_data,
+def sentence_2_sparse(train_data,
                        test_data=None,
                        language='Chinese',
                        hash=True,
@@ -62,9 +62,9 @@ if __name__ == '__main__':
     test_data = ['全面从严测试']
     print('train_data\n',train_data,'\ntest_data\n',test_data)
     print('sentence_transform(train_data=train_data,hash=False)\n',
-          sentence_transform(train_data=train_data, hash=False))
+          sentence_2_sparse(train_data=train_data, hash=False))
     print('sentence_transform(train_data=train_data,hash=True)\n',
-          sentence_transform(train_data=train_data, hash=True))
-    m,n=sentence_transform(train_data=train_data, test_data=test_data, hash=True)
+          sentence_2_sparse(train_data=train_data, hash=True))
+    m,n=sentence_2_sparse(train_data=train_data, test_data=test_data, hash=True)
     print('sentence_transform(train_data=train_data,test_data=test_data,hash=True)\n',
           'train_data\n',m,'\ntest_data\n',n)
