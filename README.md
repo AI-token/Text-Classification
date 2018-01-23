@@ -1,4 +1,4 @@
-﻿# categorization
+﻿# Text-Classification
 
 ## 语言
 Python3.5<br>
@@ -8,7 +8,7 @@ numpy=1.13.1<br>
 scikit-learn=0.19.1<br>
 jieba=0.39<br>
 ## 脚本说明
-### 文本转稀疏矩阵：sentence_transform.py
+### 文本转稀疏矩阵：sentence_2_sparse.py
 先用jieba分词，再提供两种稀疏矩阵转换方式：1.转one-hot形式的矩阵，使用pandas的value_counts计数后转dataframe；2.sklearn.feature_extraction.text转成哈希表结构的矩阵。<br>
 ![ex1](https://github.com/renjunxiang/Text-Classification/blob/master/picture/文本转矩阵.png)
 ### 监督学习：supervised_classify.py
