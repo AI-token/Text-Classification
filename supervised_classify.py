@@ -4,8 +4,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.externals import joblib
 import pandas as pd
 import numpy as np
-from sentence_2_sparse import sentence_2_sparse
-from sentence_2_vec import sentence_2_vec
+from sentence_transform.sentence_2_sparse import sentence_2_sparse
+from sentence_transform.sentence_2_vec import sentence_2_vec
 
 
 def supervised_classify(language='English',

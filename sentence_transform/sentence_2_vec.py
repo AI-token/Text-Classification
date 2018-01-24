@@ -11,6 +11,14 @@ def sentence_2_vec(train_data,
                    size=5,
                    window=5,
                    min_count=1):
+    '''
+    
+    :param train_data: 训练集
+    :param test_data: 测试集
+    :param size: 词向量维数
+    :param window: word2vec滑窗大小
+    :param min_count: word2vec滑窗内词语数量
+    '''
     train_data = [[word for word in jieba.lcut(sample) if word != ' '] for sample in train_data]
     test_data = [[word for word in jieba.lcut(sample) if word != ' '] for sample in test_data]
     data = train_data + test_data
@@ -29,9 +37,10 @@ if __name__ == '__main__':
                   '国际公约和国际法',
                   '中国航天科技集团有限公司']
     test_data = ['全面从严测试']
-    train_data, test_data = sentence_2_vec(train_data,
-                                           test_data=test_data,
-                                           size=5,
-                                           window=5,
-                                           min_count=1)
-    print('train_data\n', train_data, '\ntest_data\n', test_data)
+    train_data_vec, test_data_vec = sentence_2_vec(train_data=train_data,
+                                                   test_data=test_data,
+                                                   size=5,
+                                                   window=5,
+                                                   min_count=1)
+    print(train_data[0],'\n', pd.DataFrame(train_data_vec[0]),
+          '\n',test_data[0],'\n', pd.DataFrame(test_data_vec[0]))

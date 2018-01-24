@@ -16,4 +16,3 @@ model.similarity(w1='国王',w2='喜欢')
 model['国王']
 train_data = [[model[word] for word in sample] for sample in train_data]
 
-
