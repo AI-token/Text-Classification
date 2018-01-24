@@ -60,7 +60,7 @@ train_data, test_data = sentence_2_vec(train_data=train_data,
 ## DEMO
 ### 监督学习的范例：demo_score.py
 读取数据集（商业数据暂时保密），拆分数据为训练集和测试集，通过supervised_classify.py进行机器学习，再对每条文本打分。<br>
-图片为数据通过CountVectorizer转换，使用SVM训练后的结果。截取部分分类错误的样本，红色为原始标签错误，蓝色为语义正误均可~<br>
+训练数据已更新,准确率最高84%<br>
 ![ex6](https://github.com/renjunxiang/Text-Classification/blob/master/picture/demo_score_1.png)
 图片为不同数据处理和不同模型的准确率<br>
 ![ex7](https://github.com/renjunxiang/Text-Classification/blob/master/picture/demo_score_2.png)

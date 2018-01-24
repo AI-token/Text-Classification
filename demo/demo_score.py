@@ -20,7 +20,7 @@ score_all = []
 
 for i in model_name:
     for j in hashmodel:
-        print('model_name:',i,' hashmodel:',j)
+        print('model name:',i,'; hashmodel:',j)
         result = supervised_classify(language='Chinese',
                                      model_exist=False,
                                      model_path=None,
@@ -33,6 +33,7 @@ for i in model_name:
         score_all.append([i,j,score])
 
 for i in model_name:
+    print('model name:', i, '; hashmodel:', None)
     result = supervised_classify(language='Chinese',
                                  model_exist=False,
                                  model_path=None,
@@ -63,3 +64,23 @@ print('score_all\n:', score_all)
 # predict_evaluate_wrong.to_excel('D:/github/Text-Classification/data/demo_score/predict.xlsx',
 #                                 index=False)#分类错误的数据保存下来
 
+result = supervised_classify(language='Chinese',
+                             model_exist=False,
+                             model_path=None,
+                             model_name='SVM',
+                             hashmodel=None,
+                             vector=True,
+                             savemodel=False,
+                             train_dataset=[list(X_train), list(y_train)],
+                             test_data=list(X_test))
+predict_evaluate = pd.DataFrame({'document': X_test,
+                                 'label': y_test,
+                                 'predict': result},
+                                columns=['document', 'label', 'predict'])
+predict_evaluate=predict_evaluate.reset_index(drop=True)
+predict_evaluate_wrong=predict_evaluate.loc[predict_evaluate.loc[:,'label']!=
+                                            predict_evaluate.loc[:,'predict'],:]
+predict_evaluate.to_excel('D:/github/Text-Classification/data/demo_score/predict.xlsx',
+                                index=False)#分类错误的数据保存下来
+predict_evaluate_wrong.to_excel('D:/github/Text-Classification/data/demo_score/predict_wrong.xlsx',
+                                index=False)#分类错误的数据保存下来
