@@ -39,7 +39,7 @@ train_data = ['全面从严治党',
               '国际公约和国际法',
               '中国航天科技集团有限公司']
 test_data = ['全面从严测试']
-train_data, test_data = sentence_2_vec(train_data,
+train_data, test_data = sentence_2_vec(train_data=train_data,
                                        test_data=test_data,
                                        size=5,
                                        window=5,
