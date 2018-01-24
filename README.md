@@ -45,16 +45,16 @@ train_data, test_data = sentence_2_vec(train_data,
                                        window=5,
                                        min_count=1)
 ```
-![ex5](https://github.com/renjunxiang/Text-Classification/blob/master/picture/sentence_2_vec.png)
+![ex2](https://github.com/renjunxiang/Text-Classification/blob/master/picture/sentence_2_vec.png)
 
 ## 模型训练
 ### 监督学习：supervised_classify.py
 利用sentence_transform.py文本转稀疏矩阵后，通过sklearn.feature_extraction.text模块转为哈希格式减小存储开销，然后通过常用的机器学习分类模型如SVM和KNN进行学习和预测。本质为将文本转为稀疏矩阵作为训练集的数据，结合标签进行监督学习。<br>
-![ex1](https://github.com/renjunxiang/Text-Classification/blob/master/picture/文本分类.png)
+![ex3](https://github.com/renjunxiang/Text-Classification/blob/master/picture/文本分类.png)
 ### 非监督学习：LDA.py
 利用sentence_transform.py文本转稀疏矩阵后，对稀疏矩阵进行ALS分解，转为文本-主题矩阵*主题-词语矩阵。<br>
-![ex2](https://github.com/renjunxiang/Text-Classification/blob/master/picture/文本主题分类数据.png)
-![ex3](https://github.com/renjunxiang/Text-Classification/blob/master/picture/文本主题分类.png)
+![ex4](https://github.com/renjunxiang/Text-Classification/blob/master/picture/文本主题分类数据.png)
+![ex5](https://github.com/renjunxiang/Text-Classification/blob/master/picture/文本主题分类.png)
 
 ## DEMO
 ### 监督学习的范例：demo_score.py
@@ -62,12 +62,12 @@ train_data, test_data = sentence_2_vec(train_data,
 图片为数据通过CountVectorizer转换，使用SVM训练后的结果。截取部分分类错误的样本，红色为原始标签错误，蓝色为语义正误均可~<br>
 ![ex4](https://github.com/renjunxiang/Text-Classification/blob/master/picture/demo_score_1.png)
 图片为不同数据处理和不同模型的准确率<br>
-![ex5](https://github.com/renjunxiang/Text-Classification/blob/master/picture/demo_score_2.png)
+![ex6](https://github.com/renjunxiang/Text-Classification/blob/master/picture/demo_score_2.png)
 
 ### 监督学习+打标签的范例：demo_topic_score.py
 读取数据集NLP\data\，关键词：keyword.json，训练集train_data.json<br>，名称的配置文件config.py。然后通过supervised_classify.py对每个主题进行机器学习，再对每条文本打分。<br>
 因为没有数据，我自己随便造了几句，训练效果马马虎虎~
-![ex4](https://github.com/renjunxiang/Text-Classification/blob/master/picture/文本分类+打标签.png)
+![ex7](https://github.com/renjunxiang/Text-Classification/blob/master/picture/文本分类+打标签.png)
 
 
 
