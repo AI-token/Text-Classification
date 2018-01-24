@@ -6,6 +6,7 @@ Python3.5<br>
 pandas=0.21.0<br>
 numpy=1.13.1<br>
 scikit-learn=0.19.1<br>
+gensim=3.2.0<br>
 jieba=0.39<br>
 
 ## 方法介绍
@@ -60,14 +61,14 @@ train_data, test_data = sentence_2_vec(train_data=train_data,
 ### 监督学习的范例：demo_score.py
 读取数据集（商业数据暂时保密），拆分数据为训练集和测试集，通过supervised_classify.py进行机器学习，再对每条文本打分。<br>
 图片为数据通过CountVectorizer转换，使用SVM训练后的结果。截取部分分类错误的样本，红色为原始标签错误，蓝色为语义正误均可~<br>
-![ex4](https://github.com/renjunxiang/Text-Classification/blob/master/picture/demo_score_1.png)
+![ex6](https://github.com/renjunxiang/Text-Classification/blob/master/picture/demo_score_1.png)
 图片为不同数据处理和不同模型的准确率<br>
-![ex6](https://github.com/renjunxiang/Text-Classification/blob/master/picture/demo_score_2.png)
+![ex7](https://github.com/renjunxiang/Text-Classification/blob/master/picture/demo_score_2.png)
 
 ### 监督学习+打标签的范例：demo_topic_score.py
 读取数据集NLP\data\，关键词：keyword.json，训练集train_data.json<br>，名称的配置文件config.py。然后通过supervised_classify.py对每个主题进行机器学习，再对每条文本打分。<br>
 因为没有数据，我自己随便造了几句，训练效果马马虎虎~
-![ex7](https://github.com/renjunxiang/Text-Classification/blob/master/picture/文本分类+打标签.png)
+![ex8](https://github.com/renjunxiang/Text-Classification/blob/master/picture/文本分类+打标签.png)
 
 
 
