@@ -24,7 +24,7 @@ train_data = ['全面从严治党',
 test_data = ['全面从严测试']
 m, n = sentence_2_sparse(train_data=train_data, test_data=test_data, hash=True)
 ```
-![ex1](https://github.com/renjunxiang/Text-Classification/blob/master/picture/文本转矩阵.png)
+![ex1](https://github.com/renjunxiang/Text-Classification/blob/master/picture/sentence_2_sparse.png)
 
 ### 文本转词向量：sentence_2_vec.py
 先用jieba分词，再调用gensim.models的word2vec计算词向量。<br>
@@ -45,7 +45,7 @@ train_data, test_data = sentence_2_vec(train_data,
                                        window=5,
                                        min_count=1)
 ```
-![ex1](https://github.com/renjunxiang/Text-Classification/blob/master/picture/文本转矩阵.png)
+![ex5](https://github.com/renjunxiang/Text-Classification/blob/master/picture/sentence_2_vec.png)
 
 ## 模型训练
 ### 监督学习：supervised_classify.py
