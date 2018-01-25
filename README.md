@@ -98,7 +98,7 @@ train_data, test_data = sentence_2_vec(train_data=train_data,
 利用sentence_transform.py文本转稀疏矩阵后，通过sklearn.feature_extraction.text模块转为哈希格式减小存储开销，然后通过常用的机器学习分类模型如SVM和KNN进行学习和预测。本质为将文本转为稀疏矩阵作为训练集的数据，结合标签进行监督学习。<br>
 ![ex3](https://github.com/renjunxiang/Text-Classification/blob/master/picture/文本分类.png)
 
-### LSTM：LDA.py
+### LSTM：neural_LSTM.py
 keras的LSTM简单封装。<br>
 ``` python
 # neural_LSTM(input_shape,
