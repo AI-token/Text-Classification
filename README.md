@@ -8,6 +8,10 @@ numpy=1.13.1<br>
 scikit-learn=0.19.1<br>
 gensim=3.2.0<br>
 jieba=0.39<br>
+keras=2.1.1<br>
+
+## 方法介绍
+项目介绍：通过对已有标签的帖子进行训练，实现新帖子的情感分类。现阶段通过第三方购买的数据，文本为爬虫抓取的电商购物评论，标签为“正面/负面”。
 
 ## 方法介绍
 ### 文本转tokenizer编码：sentence_2_tokenizer.py

@@ -52,7 +52,7 @@ score_all = pd.pivot_table(data=score_all,
                            index='model_name',
                            columns='Transformer',
                            values='score')
-print('score_all\n:', score_all)
+print('score_all:\n', score_all)
 
 # predict_evaluate = pd.DataFrame({'document': X_test,
 #                                  'label': y_test,
