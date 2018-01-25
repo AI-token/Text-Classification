@@ -1,7 +1,7 @@
 import json
 import numpy as np
 import pandas as pd
-from supervised_classify import supervised_classify
+from models.supervised_classify import supervised_classify
 from data.demo_topic_score.config import word_name
 
 with open('D:/github/Text-Classification/data/demo_topic_score/keyword.json', encoding='utf-8') as f:
