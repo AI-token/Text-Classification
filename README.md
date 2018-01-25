@@ -14,7 +14,7 @@ keras=2.1.1<br>
 项目介绍：通过对已有标签的帖子进行训练，实现新帖子的情感分类。现阶段通过第三方购买的数据，文本为爬虫抓取的电商购物评论，标签为“正面/负面”。<br>
 目前传统的机器学习模型准确率在84%左右，SVM效果最好，但深度学习方法里面LSTM效果较差仅为64%，查找原因中~
 
-## 文本预处理
+## 文本预处理 Text-Classification\sentence_transform
 ### 文本转tokenizer编码：sentence_2_tokenizer.py
 先用jieba分词，再调用keras.preprocessing.text import Tokenizer转编码。<br>
 ``` python
@@ -93,7 +93,7 @@ train_data, test_data = sentence_2_vec(train_data=train_data,
 ```
 ![ex2](https://github.com/renjunxiang/Text-Classification/blob/master/picture/sentence_2_vec.png)
 
-## 模型训练 models
+## 模型训练 Text-Classification\models
 ### 监督机器学习：supervised_classify.py
 利用sentence_transform.py文本转稀疏矩阵后，通过sklearn.feature_extraction.text模块转为哈希格式减小存储开销，然后通过常用的机器学习分类模型如SVM和KNN进行学习和预测。本质为将文本转为稀疏矩阵作为训练集的数据，结合标签进行监督学习。<br>
 ![ex3](https://github.com/renjunxiang/Text-Classification/blob/master/picture/文本分类.png)
@@ -157,7 +157,7 @@ print('topic_recommend_word\n', topic_word)
 ![ex4](https://github.com/renjunxiang/Text-Classification/blob/master/picture/文本主题分类数据.png)
 ![ex5](https://github.com/renjunxiang/Text-Classification/blob/master/picture/文本主题分类.png)
 
-## DEMO
+## 案例 Text-Classification\demo
 ### 监督学习的范例：demo_score.py
 读取数据集（商业数据暂时保密，仅提供部分预测结果约1400条），拆分数据为训练集和测试集，通过supervised_classify.py进行机器学习，再对每条文本打分。<br>
 训练数据已更新,准确率最高84%<br>
