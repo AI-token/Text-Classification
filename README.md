@@ -28,6 +28,7 @@ keras=2.1.1<br>
 # test_data: 测试集
 # num_words: 词库大小,None则依据样本自动判定
 # word_index: 是否需要索引
+
 from sentence_transform.sentence_2_tokenizer import sentence_2_tokenizer
 
 train_data = ['全面从严治党',
@@ -55,6 +56,7 @@ train_data_vec, test_data_vec, word_index = sentence_2_tokenizer(train_data=trai
 # language: 语种
 # hash: 是否转哈希存储
 # hashmodel: 哈希计数的方式
+
 from sentence_transform.sentence_2_sparse import sentence_2_sparse
 
 train_data = ['全面从严治党',
@@ -79,6 +81,7 @@ m, n = sentence_2_sparse(train_data=train_data, test_data=test_data, hash=True)
 # size: 词向量维数
 # window: word2vec滑窗大小
 # min_count: word2vec滑窗内词语数量
+
 from sentence_transform.sentence_2_vec import sentence_2_vec
 
 train_data = ['全面从严治党',
@@ -110,6 +113,7 @@ keras的LSTM简单封装。<br>
 # net_shape: 神经网络格式
 # optimizer_name: 优化器
 # lr: 学习率
+
 from models.neural_LSTM import neural_LSTM
 
 model = neural_LSTM(input_shape=[10, 5],
@@ -136,6 +140,7 @@ keras的Conv1D简单封装。<br>
 # net_dense_shape: 全连接数量
 # optimizer_name: 优化器
 # lr: 学习率
+
 from models.neural_Conv1D import neural_Conv1D
 
 model = neural_Conv1D(input_shape=[10, 5],
@@ -146,7 +151,7 @@ model = neural_Conv1D(input_shape=[10, 5],
                       lr=0.001)
 model.summary()
 ```
-![neural_LSTM](https://github.com/renjunxiang/Text-Classification/blob/master/picture/neural_Conv1D.png)
+![neural_Conv1D](https://github.com/renjunxiang/Text-Classification/blob/master/picture/neural_Conv1D.png)
 
 ### 非监督学习：LDA.py
 ``` python
@@ -163,6 +168,7 @@ model.summary()
 # beta = 正则系数,
 # steps = 迭代上限,
 # error = 误差阈值
+
 from models.LDA import LDA
 
 dataset = [['document' + str(i) for i in range(1, 11)],
