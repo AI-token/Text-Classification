@@ -7,6 +7,13 @@ def neural_LSTM(input_shape,
                 net_shape=[64,64,128,2],
                 optimizer_name='Adagrad',
                 lr=0.001):
+    '''
+    
+    :param input_shape: 样本数据格式
+    :param net_shape: 神经网络格式
+    :param optimizer_name: 优化器
+    :param lr: 学习率
+    '''
     model = Sequential()
     # 识别之前的'截断/填充',跳过填充
     model.add(Masking(mask_value=0, input_shape=input_shape))

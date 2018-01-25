@@ -4,7 +4,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sentence_transform.sentence_2_sparse import sentence_2_sparse
 from sentence_transform.sentence_2_vec import sentence_2_vec
-from models.LSTM import neural_LSTM
+from models.neural_LSTM import neural_LSTM
 
 positive = pd.read_excel('D:/github/Text-Classification/data/demo_score/data.xlsx',
                          sheet_name='positive')
