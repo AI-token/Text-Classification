@@ -14,7 +14,7 @@ keras=2.1.1<br>
 项目介绍：通过对已有标签的帖子进行训练，实现新帖子的情感分类。现阶段通过第三方购买的数据，文本为爬虫抓取的电商购物评论，标签为“正面/负面”。<br>
 目前传统的机器学习模型准确率在84%左右，SVM效果最好，但深度学习方法里面LSTM效果较差仅为64%，查找原因中~
 
-## 方法介绍
+## 文本预处理
 ### 文本转tokenizer编码：sentence_2_tokenizer.py
 先用jieba分词，再调用keras.preprocessing.text import Tokenizer转编码。<br>
 ``` python
