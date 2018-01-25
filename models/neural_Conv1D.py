@@ -1,13 +1,15 @@
 from keras.models import Sequential
-from keras.layers.core import Masking, Dense, initializers
+from keras.layers.core import Dense, initializers, Flatten
 from keras.layers import Conv1D
-from keras.layers import Conv1D
-from parameter.optimizers import optimizers
+from keras.layers.pooling import MaxPooling1D
+from models.parameter.optimizers import optimizers
 
 
 def neural_Conv1D(input_shape,
                   net_conv_num=[64, 64],
                   kernel_size=[5, 5],
+                  pooling=True,
+                  pooling_size=[5, 5],
                   net_dense_shape=[128, 64, 2],
                   optimizer_name='Adagrad',
                   lr=0.001):
@@ -30,7 +32,14 @@ def neural_Conv1D(input_shape,
                          activation='relu',
                          kernel_initializer=initializers.normal(stddev=0.1),
                          bias_initializer=initializers.normal(stddev=0.1),
-                         name='Conv1D_'+str(n)))
+                         name='Conv1D_' + str(n)))
+        if pooling == True:
+            model.add((MaxPooling1D(pool_size=pooling_size[n],  # 卷积核尺寸，或者[3]
+                                    strides=2,
+                                    padding='same',
+                                    name='MaxPooling1D_' + str(n))))
+    # 增加展平层
+    model.add(Flatten())
     # 增加全连接隐藏层
     for n, units in enumerate(net_dense_shape[0:-1]):
         model.add(Dense(units=units,
@@ -53,6 +62,8 @@ if __name__ == '__main__':
     model = neural_Conv1D(input_shape=[10, 5],
                           net_conv_num=[64, 64],
                           kernel_size=[5, 5],
+                          pooling=True,
+                          pooling_size=[5, 5],
                           net_dense_shape=[128, 64, 2],
                           optimizer_name='Adagrad',
                           lr=0.001)

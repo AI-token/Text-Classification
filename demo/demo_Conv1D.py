@@ -4,7 +4,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sentence_transform.sentence_2_sparse import sentence_2_sparse
 from sentence_transform.sentence_2_vec import sentence_2_vec
-from models.neural_LSTM import neural_LSTM
+from models.neural_Conv1D import neural_Conv1D
 
 positive = pd.read_excel('D:/github/Text-Classification/data/demo_score/data.xlsx',
                          sheet_name='positive')
@@ -27,12 +27,14 @@ train_data, test_data, train_label, test_label = train_test_split(data_transform
                                                                   label_transform,
                                                                   test_size=0.33,
                                                                   random_state=42)
-model = neural_LSTM(input_shape=data_transform.shape[-2:],
-                    net_shape=[64, 64, 128, 2],
-                    optimizer_name='SGD',
-                    lr=0.001)
+model = neural_Conv1D(input_shape=data_transform.shape[-2:],
+                      net_conv_num=[64, 64],
+                      kernel_size=[5, 5],
+                      net_dense_shape=[128, 64, 2],
+                      optimizer_name='Adagrad',
+                      lr=0.001)
 
-model.fit(train_data, train_label, batch_size=50, epochs=2, verbose=1,
+model.fit(train_data, train_label, batch_size=50, epochs=20, verbose=1,
           validation_data=(test_data, test_label))
 
 # model.save('ppp.h5')

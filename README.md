@@ -130,13 +130,18 @@ keras的Conv1D简单封装。<br>
 # neural_Conv1D(input_shape,
 #               net_conv_num=[64, 64],
 #               kernel_size=[5, 5],
+#               pooling=True,
+#               pooling_size=[5, 5],
 #               net_dense_shape=[128, 64, 2],
 #               optimizer_name='Adagrad',
 #               lr=0.001)
 
+
 # input_shape: 样本数据格式
 # net_conv_num: 卷积核数量
 # kernel_size: 卷积核尺寸
+# pooling_size: 池化尺寸
+# pooling: 是否需要池化
 # net_dense_shape: 全连接数量
 # optimizer_name: 优化器
 # lr: 学习率
