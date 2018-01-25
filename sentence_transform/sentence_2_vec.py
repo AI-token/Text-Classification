@@ -19,15 +19,18 @@ def sentence_2_vec(train_data,
     :param window: word2vec滑窗大小
     :param min_count: word2vec滑窗内词语数量
     '''
-    train_data = [[word for word in jieba.lcut(sample) if word != ' '] for sample in train_data]
-    test_data = [[word for word in jieba.lcut(sample) if word != ' '] for sample in test_data]
-    data = train_data + test_data
-    model = word2vec.Word2Vec(data, size=size, window=window, min_count=min_count)
-    train_data = [[model[word] for word in sample] for sample in train_data]
     if test_data == None:
+        train_data = [[word for word in jieba.lcut(sample) if word != ' '] for sample in train_data]
+        model = word2vec.Word2Vec(train_data, size=size, window=window, min_count=min_count)
+        train_data = [[model[word] for word in sample] for sample in train_data]
         return train_data
 
     else:
+        train_data = [[word for word in jieba.lcut(sample) if word != ' '] for sample in train_data]
+        test_data = [[word for word in jieba.lcut(sample) if word != ' '] for sample in test_data]
+        data = train_data + test_data
+        model = word2vec.Word2Vec(data, size=size, window=window, min_count=min_count)
+        train_data = [[model[word] for word in sample] for sample in train_data]
         test_data = [[model[word] for word in sample] for sample in test_data]
         return train_data, test_data
 
