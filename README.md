@@ -120,6 +120,34 @@ model.summary()
 ```
 ![neural_LSTM](https://github.com/renjunxiang/Text-Classification/blob/master/picture/neural_LSTM.png)
 
+### Conv1D：neural_Conv1D.py
+keras的Conv1D简单封装。<br>
+``` python
+# neural_Conv1D(input_shape,
+#               net_conv_num=[64, 64],
+#               kernel_size=[5, 5],
+#               net_dense_shape=[128, 64, 2],
+#               optimizer_name='Adagrad',
+#               lr=0.001)
+
+# input_shape: 样本数据格式
+# net_conv_num: 卷积核数量
+# kernel_size: 卷积核尺寸
+# net_dense_shape: 全连接数量
+# optimizer_name: 优化器
+# lr: 学习率
+from models.neural_Conv1D import neural_Conv1D
+
+model = neural_Conv1D(input_shape=[10, 5],
+                      net_conv_num=[64, 64],
+                      kernel_size=[5, 5],
+                      net_dense_shape=[128, 64, 2],
+                      optimizer_name='Adagrad',
+                      lr=0.001)
+model.summary()
+```
+![neural_LSTM](https://github.com/renjunxiang/Text-Classification/blob/master/picture/neural_Conv1D.png)
+
 ### 非监督学习：LDA.py
 ``` python
 # LDA(dataset=None,
