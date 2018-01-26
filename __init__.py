@@ -1,1 +1,1 @@
-__all__ = ['models','sentence_transform','data']
+__all__ = ['models','sentence_transform','data','test']

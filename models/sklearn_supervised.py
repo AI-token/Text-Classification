@@ -8,15 +8,15 @@ from sentence_transform.sentence_2_sparse import sentence_2_sparse
 from sentence_transform.sentence_2_vec import sentence_2_vec
 
 
-def supervised_classify(language='English',
-                        model_exist=False,
-                        model_path=None,
-                        model_name='SVM',
-                        vector=True,
-                        hashmodel='CountVectorizer',
-                        savemodel=False,
-                        train_dataset=None,
-                        test_data=None):
+def sklearn_supervised(language='English',
+                       model_exist=False,
+                       model_path=None,
+                       model_name='SVM',
+                       vector=True,
+                       hashmodel='CountVectorizer',
+                       savemodel=False,
+                       train_dataset=None,
+                       test_data=None):
     '''
     :param language: 语种,中文将调jieba先分词
     :param model_exist: 模型是否存在
@@ -81,10 +81,10 @@ if __name__ == '__main__':
                  ]
     test_label = ['possitive', 'negative', 'possitive', 'negative']
 
-    result = supervised_classify(train_dataset=train_dataset,
-                                 test_data=test_data,
-                                 model_name='SVM',
-                                 language='English')
+    result = sklearn_supervised(train_dataset=train_dataset,
+                                test_data=test_data,
+                                model_name='SVM',
+                                language='English')
     print('score:', np.sum(result == np.array(test_label)) / len(result))
     result = pd.DataFrame({'data': test_data,
                            'label': test_label,
@@ -107,10 +107,10 @@ if __name__ == '__main__':
                  '涛哥非常喜欢吃苹果',
                  '涛哥非常讨厌吃苹果']
     test_label = ['正面', '负面', '正面', '负面']
-    result = supervised_classify(train_dataset=train_dataset,
-                                 test_data=test_data,
-                                 model_name='SVM',
-                                 language='Chinese')
+    result = sklearn_supervised(train_dataset=train_dataset,
+                                test_data=test_data,
+                                model_name='SVM',
+                                language='Chinese')
     print('score:', np.sum(result == np.array(test_label)) / len(result))
     result = pd.DataFrame({'data': test_data,
                            'label': test_label,
