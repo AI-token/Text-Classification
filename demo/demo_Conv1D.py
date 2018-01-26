@@ -1,10 +1,12 @@
 from keras.preprocessing.sequence import pad_sequences
+from keras.callbacks import History
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sentence_transform.sentence_2_sparse import sentence_2_sparse
 from sentence_transform.sentence_2_vec import sentence_2_vec
 from models.neural_Conv1D import neural_Conv1D
+from models.keras_log_plot import keras_log_plot
 
 positive = pd.read_excel('D:/github/Text-Classification/data/demo_score/data.xlsx',
                          sheet_name='positive')
@@ -28,15 +30,21 @@ train_data, test_data, train_label, test_label = train_test_split(data_transform
                                                                   test_size=0.33,
                                                                   random_state=42)
 model = neural_Conv1D(input_shape=data_transform.shape[-2:],
-                      net_conv_num=[64, 64],
-                      kernel_size=[5, 5],
-                      net_dense_shape=[128, 64, 2],
+                      net_conv_num=[32, 64,128],
+                      kernel_size=[5, 5,3],
+                      pooling_size=[5, 5,5],
+                      net_dense_shape=[128, 64, 32,2],
                       optimizer_name='Adagrad',
                       lr=0.001)
 
-model.fit(train_data, train_label, batch_size=50, epochs=20, verbose=1,
-          validation_data=(test_data, test_label))
+history=History()
+model.fit(train_data, train_label, batch_size=50, epochs=20, verbose=2,
+          validation_data=(test_data, test_label), callbacks=[history])
 
 # model.save('ppp.h5')
 # from keras.models import load_model
 # model_new=load_model('ppp.h5')
+
+train_log=pd.DataFrame(history.history)
+keras_log_plot(train_log)
+
