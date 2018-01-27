@@ -18,6 +18,7 @@ def sentence_2_vec(train_data,
     :param size: 词向量维数
     :param window: word2vec滑窗大小
     :param min_count: word2vec滑窗内词语数量
+    :param return: 返回词向量数组
     '''
     if test_data == None:
         train_data = [[word for word in jieba.lcut(sample) if word != ' '] for sample in train_data]

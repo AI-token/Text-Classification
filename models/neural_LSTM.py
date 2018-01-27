@@ -13,6 +13,7 @@ def neural_LSTM(input_shape,
     :param net_shape: 神经网络格式
     :param optimizer_name: 优化器
     :param lr: 学习率
+    :param return: 返回神经网络模型
     '''
     model = Sequential()
     # 识别之前的'截断/填充',跳过填充

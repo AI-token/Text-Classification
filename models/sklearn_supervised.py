@@ -26,6 +26,7 @@ def sklearn_supervised(language='English',
     :param savemodel: 保存模型
     :param train_dataset: 训练集[[数据],[标签]]
     :param test_data: 测试集[数据]
+    :param return: 预测结果的数组
     '''
     if vector == True:
         train_data_transform, test_data_transform = sentence_2_vec(train_data=train_dataset[0],

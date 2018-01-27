@@ -19,6 +19,7 @@ def neural_Conv1D(input_shape,
     :param net_shape: 神经网络格式
     :param optimizer_name: 优化器
     :param lr: 学习率
+    :param return: 返回神经网络模型
     '''
     model = Sequential()
     # 增加Conv1D层

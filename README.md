@@ -10,11 +10,41 @@ gensim=3.2.0<br>
 jieba=0.39<br>
 keras=2.1.1<br>
 
-## 方法介绍
-项目介绍：通过对已有标签的帖子进行训练，实现新帖子的情感分类。现阶段通过第三方购买的数据，文本为爬虫抓取的电商购物评论，标签为“正面/负面”。<br>
+## 项目介绍
+通过对已有标签的帖子进行训练，实现新帖子的情感分类。现阶段通过第三方购买的数据，文本为爬虫抓取的电商购物评论，标签为“正面/负面”。<br>
 目前传统的机器学习模型准确率在84%左右，SVM效果最好，但深度学习方法里面LSTM效果较差仅为64%，查找原因中~
 
-## 文本预处理 Text-Classification\sentence_transform
+## 获取数据 creat_data
+### 利用百度AI打标签：baidu.py
+API和SDK两种方式。<br>
+``` python
+# creat_label(texts, interface='SDK')
+
+# texts: 需要打标签的文档列表
+# interface: 接口方式，SDK和API
+# return: 打好标签的列表，包括原始文档、标签、置信水平、正负面概率
+
+from creat_data.baidu import creat_label
+
+results = creat_label(texts=['价格便宜啦，比原来优惠多了',
+                             '壁挂效果差，果然一分价钱一分货',
+                             '东西一般般，诶呀',
+                             '快递非常快，电视很惊艳，非常喜欢',
+                             '到货很快，师傅很热情专业。'
+                             ],
+                      interface='SDK')
+results = pd.DataFrame(results, columns=['evaluation',
+                                         'label',
+                                         'confidence',
+                                         'positive_prob',
+                                         'negative_prob'])
+results['label'] = np.where(results['label'] == 2, '正面', '负面')
+print(results)
+print(result)
+```
+![baidu](https://github.com/renjunxiang/Text-Classification/blob/master/picture/baidu.png)
+
+## 文本预处理 sentence_transform
 ### 文本转tokenizer编码：sentence_2_tokenizer.py
 先用jieba分词，再调用keras.preprocessing.text import Tokenizer转编码。<br>
 ``` python
@@ -28,6 +58,7 @@ keras=2.1.1<br>
 # test_data: 测试集
 # num_words: 词库大小,None则依据样本自动判定
 # word_index: 是否需要索引
+# return:返回编码后数组
 
 from sentence_transform.sentence_2_tokenizer import sentence_2_tokenizer
 
@@ -56,6 +87,7 @@ train_data_vec, test_data_vec, word_index = sentence_2_tokenizer(train_data=trai
 # language: 语种
 # hash: 是否转哈希存储
 # hashmodel: 哈希计数的方式
+# return: 返回编码后稀疏矩阵
 
 from sentence_transform.sentence_2_sparse import sentence_2_sparse
 
@@ -81,6 +113,7 @@ m, n = sentence_2_sparse(train_data=train_data, test_data=test_data, hash=True)
 # size: 词向量维数
 # window: word2vec滑窗大小
 # min_count: word2vec滑窗内词语数量
+# return: 返回词向量数组
 
 from sentence_transform.sentence_2_vec import sentence_2_vec
 
@@ -96,7 +129,7 @@ train_data, test_data = sentence_2_vec(train_data=train_data,
 ```
 ![ex2](https://github.com/renjunxiang/Text-Classification/blob/master/picture/sentence_2_vec.png)
 
-## 模型训练 Text-Classification\models
+## 模型训练 models
 ### 监督机器学习：supervised_classify.py
 利用sentence_transform.py文本转稀疏矩阵后，通过sklearn.feature_extraction.text模块转为哈希格式减小存储开销，然后通过常用的机器学习分类模型如SVM和KNN进行学习和预测。本质为将文本转为稀疏矩阵作为训练集的数据，结合标签进行监督学习。<br>
 ![ex3](https://github.com/renjunxiang/Text-Classification/blob/master/picture/文本分类.png)
@@ -113,6 +146,7 @@ keras的LSTM简单封装。<br>
 # net_shape: 神经网络格式
 # optimizer_name: 优化器
 # lr: 学习率
+# return: 返回神经网络模型
 
 from models.neural_LSTM import neural_LSTM
 
@@ -145,6 +179,7 @@ keras的Conv1D简单封装。<br>
 # net_dense_shape: 全连接数量
 # optimizer_name: 优化器
 # lr: 学习率
+# return: 返回神经网络模型
 
 from models.neural_Conv1D import neural_Conv1D
 
@@ -196,7 +231,7 @@ print('topic_recommend_word\n', topic_word)
 ![ex4](https://github.com/renjunxiang/Text-Classification/blob/master/picture/文本主题分类数据.png)
 ![ex5](https://github.com/renjunxiang/Text-Classification/blob/master/picture/文本主题分类.png)
 
-## 案例 Text-Classification\demo
+## 案例 demo
 ### 监督学习的范例：demo_score.py
 读取数据集（商业数据暂时保密，仅提供部分预测结果约1400条），拆分数据为训练集和测试集，通过supervised_classify.py进行机器学习，再对每条文本打分。<br>
 训练数据已更新,准确率最高84%<br>

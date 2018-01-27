@@ -15,6 +15,7 @@ def sentence_2_tokenizer(train_data,
     :param test_data: 测试集
     :param num_words: 词库大小,None则依据样本自动判定
     :param word_index: 是否需要索引
+    :param return: 返回编码后数组
     '''
     train_data = [' '.join([word for word in jieba.lcut(sample) if word != ' ']) for sample in train_data]
     test_data = [' '.join([word for word in jieba.lcut(sample) if word != ' ']) for sample in test_data]

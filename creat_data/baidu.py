@@ -8,6 +8,11 @@ import requests
 
 # 逐句调用接口判断
 def creat_label(texts, interface='SDK'):
+    '''
+    :param texts: 需要打标签的文档列表
+    :param interface: 接口方式，SDK和API
+    :return: 打好标签的列表，包括原始文档、标签、置信水平、正负面概率
+    '''
     # 创建连接
     client = AipNlp(baidu['account']['id_1']['APP_ID'],
                     baidu['account']['id_1']['API_KEY'],

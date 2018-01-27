@@ -17,6 +17,7 @@ def sentence_2_sparse(train_data,
     :param language: 语种
     :param hash: 是否转哈希存储
     :param hashmodel: 哈希计数的方式
+    :param return: 返回编码后稀疏矩阵
     '''
     # 分词转one-hot dataframe
     if test_data==None:
