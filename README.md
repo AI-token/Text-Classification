@@ -136,7 +136,7 @@ train_data, test_data = sentence_2_vec(train_data=train_data,
 ![ex2](https://github.com/renjunxiang/Text-Classification/blob/master/picture/sentence_2_vec.png)
 
 ## 模型训练 models
-### 监督机器学习：supervised_classify.py
+### 监督机器学习：sklearn_supervised.py
 利用sentence_transform.py文本转稀疏矩阵后，通过sklearn.feature_extraction.text模块转为哈希格式减小存储开销，然后通过常用的机器学习分类模型如SVM和KNN进行学习和预测。本质为将文本转为稀疏矩阵作为训练集的数据，结合标签进行监督学习。<br>
 ![ex3](https://github.com/renjunxiang/Text-Classification/blob/master/picture/文本分类.png)
 
