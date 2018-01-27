@@ -1,5 +1,5 @@
 from aip import AipNlp
-from creat_data.config import account_baidu
+from creat_data.config import baidu
 import pandas as pd
 import numpy as np
 import json
@@ -9,9 +9,9 @@ import requests
 # 逐句调用接口判断
 def creat_label(texts, interface='SDK'):
     # 创建连接
-    client = AipNlp(account_baidu['id_1']['APP_ID'],
-                    account_baidu['id_1']['API_KEY'],
-                    account_baidu['id_1']['SECRET_KEY'])
+    client = AipNlp(baidu['account']['id_1']['APP_ID'],
+                    baidu['account']['id_1']['API_KEY'],
+                    baidu['account']['id_1']['SECRET_KEY'])
     results = []
     if interface == 'SDK':
         for one_text in texts:
@@ -24,16 +24,16 @@ def creat_label(texts, interface='SDK'):
                             ])
     elif interface == 'API':
         # 获取access_token
-        url = 'https://aip.baidubce.com/oauth/2.0/token'
+        url = baidu['access_token_url']
         params = {'grant_type': 'client_credentials',
-                  'client_id': account_baidu['id_1']['API_KEY'],
-                  'client_secret': account_baidu['id_1']['SECRET_KEY']}
+                  'client_id': baidu['account']['id_1']['API_KEY'],
+                  'client_secret': baidu['account']['id_1']['SECRET_KEY']}
         r = requests.post(url, params=params)
         access_token = json.loads(r.text)['access_token']
 
-        url = 'https://aip.baidubce.com/rpc/2.0/nlp/v1/sentiment_classify'
+        url = baidu['api']['sentiment_classify']['url']
         params = {'access_token': access_token}
-        headers = {'Content-Type': 'application/json'}
+        headers = {'Content-Type': baidu['api']['sentiment_classify']['Content-Type']}
         for one_text in texts:
             data = json.dumps({'text': one_text})
             r = requests.post(url=url,
@@ -53,6 +53,8 @@ def creat_label(texts, interface='SDK'):
         data = json.dumps({'text': '价格便宜啦，比原来优惠多了'})
         r = requests.post(url=url, params=params, headers=headers, data=data)
         result = json.loads(r.text)
+    else:
+        print('ERROR: No interface named %s' % (interface))
     return results
 
 
@@ -62,7 +64,8 @@ if __name__ == '__main__':
                                  '东西一般般，诶呀',
                                  '快递非常快，电视很惊艳，非常喜欢',
                                  '到货很快，师傅很热情专业。'
-                                 ])
+                                 ],
+                          interface='SDK')
     results = pd.DataFrame(results, columns=['evaluation',
                                              'label',
                                              'confidence',
