@@ -68,7 +68,8 @@ if __name__ == '__main__':
                                  '壁挂效果差，果然一分价钱一分货',
                                  '东西一般般，诶呀',
                                  '快递非常快，电视很惊艳，非常喜欢',
-                                 '到货很快，师傅很热情专业。'
+                                 '到货很快，师傅很热情专业。',
+                                 '讨厌你'
                                  ],
                           interface='SDK')
     results = pd.DataFrame(results, columns=['evaluation',
@@ -76,5 +77,6 @@ if __name__ == '__main__':
                                              'confidence',
                                              'positive_prob',
                                              'negative_prob'])
-    results['label'] = np.where(results['label'] == 2, '正面', '负面')
+    results['label'] = np.where(results['label'] == 2,'正面',
+                                np.where(results['label'] == 1, '中性', '负面') )
     print(results)
