@@ -192,6 +192,88 @@ train_data, test_data = sentence_2_vec(train_data=train_data,
 ## 模型训练 models
 ### 监督机器学习：sklearn_supervised.py
 利用sentence_transform.py文本转稀疏矩阵后，通过sklearn.feature_extraction.text模块转为哈希格式减小存储开销，然后通过常用的机器学习分类模型如SVM和KNN进行学习和预测。本质为将文本转为稀疏矩阵作为训练集的数据，结合标签进行监督学习。<br>
+``` python
+# sklearn_supervised(language='English',
+#                    model_exist=False,
+#                    model_path=None,
+#                    model_name='SVM',
+#                    vector=True,
+#                    hashmodel='CountVectorizer',
+#                    savemodel=False,
+#                    train_dataset=None,
+#                    test_data=None)
+
+
+
+# language: 语种,中文将调jieba先分词
+# model_exist: 模型是否存在
+# model_path: 模型路径
+# model_name: 机器学习分类模型,SVM,KNN,Logistic
+# hashmodel: 哈希方式:CountVectorizer,TfidfTransformer,HashingVectorizer
+# savemodel: 保存模型
+# train_dataset: 训练集[[数据],[标签]]
+# test_data: 测试集[数据]
+# return: 预测结果的数组
+
+import numpy as np
+import pandas as pd
+from models.sklearn_supervised import sklearn_supervised
+
+print('example:English')
+train_dataset = [['he likes apple',
+                  'he really likes apple',
+                  'he hates apple',
+                  'he really hates apple'],
+                 ['possitive', 'possitive', 'negative', 'negative']]
+print('train data\n',
+      pd.DataFrame({'data': train_dataset[0],
+                    'label': train_dataset[1]},
+                   columns=['data', 'label']))
+test_data = ['she likes apple',
+             'she really hates apple',
+             'tom likes apple',
+             'tom really hates apple'
+             ]
+test_label = ['possitive', 'negative', 'possitive', 'negative']
+
+result = sklearn_supervised(train_dataset=train_dataset,
+                            test_data=test_data,
+                            model_name='SVM',
+                            language='English')
+print('score:', np.sum(result == np.array(test_label)) / len(result))
+result = pd.DataFrame({'data': test_data,
+                       'label': test_label,
+                       'predict': result},
+                      columns=['data', 'label', 'predict'])
+print('test\n', result)
+
+print('example:Chinese')
+train_dataset = [['国王喜欢吃苹果',
+                  '国王非常喜欢吃苹果',
+                  '国王讨厌吃苹果',
+                  '国王非常讨厌吃苹果'],
+                 ['正面', '正面', '负面', '负面']]
+print('train data\n',
+      pd.DataFrame({'data': train_dataset[0],
+                    'label': train_dataset[1]},
+                   columns=['data', 'label']))
+test_data = ['涛哥喜欢吃苹果',
+             '涛哥讨厌吃苹果',
+             '涛哥非常喜欢吃苹果',
+             '涛哥非常讨厌吃苹果']
+test_label = ['正面', '负面', '正面', '负面']
+result = sklearn_supervised(train_dataset=train_dataset,
+                            test_data=test_data,
+                            model_name='SVM',
+                            language='Chinese')
+print('score:', np.sum(result == np.array(test_label)) / len(result))
+result = pd.DataFrame({'data': test_data,
+                       'label': test_label,
+                       'predict': result},
+                      columns=['data', 'label', 'predict'])
+print('test\n', result)
+
+```
 ![ex3](https://github.com/renjunxiang/Text-Classification/blob/master/picture/文本分类.png)
 
 ### LSTM：neural_LSTM.py
