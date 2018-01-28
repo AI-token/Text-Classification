@@ -19,7 +19,7 @@ keras=2.1.1<br>
 ## 项目介绍
 通过对已有标签的帖子进行训练，实现新帖子的情感分类。现阶段通过第三方购买的数据，文本为爬虫抓取的电商购物评论，标签为“正面/负面”。<br>
 目前传统的机器学习模型准确率在84%左右，SVM效果最好，但深度学习方法里面LSTM效果较差仅为64%，一维卷积为81%，查找原因中~<br>
-***PS：这是本人毕业后通过业余时间做的第一个项目，结合了大半年时间的所见所闻~目前公司情感分析也参考了这个项目，有很多不足，欢迎萌新、大佬多多指导！***
+***PS：这是本人毕业后通过业余时间做的第一个项目，结合了大半年时间的所学，耗时一个月时间已近尾声~目前公司情感分析也参考了这个项目，有很多不足，欢迎萌新、大佬多多指导！***
 
 ## 获取数据 creat_data
 ### 利用百度AI打标签：baidu.py
@@ -374,17 +374,25 @@ print('topic_recommend_word\n', topic_word)
 ![ex5](https://github.com/renjunxiang/Text-Classification/blob/master/picture/文本主题分类.png)
 
 ## 案例 demo
-### 监督学习的范例：demo_score.py
-读取数据集（商业数据暂时保密，仅提供部分预测结果约1400条），拆分数据为训练集和测试集，通过supervised_classify.py进行机器学习，再对每条文本打分。<br>
+### 机器监督学习的范例：demo_score.py
+读取数据集data\demo_score\data.xlsx（商业数据暂时保密，仅提供部分预测结果约1400条），拆分数据为训练集和测试集，通过supervised_classify.py进行机器学习，再对每条文本打分。<br>
 训练数据已更新,准确率最高84%<br>
 ![ex6](https://github.com/renjunxiang/Text-Classification/blob/master/picture/demo_score_1.png)
 图片为不同数据处理和不同模型的准确率<br>
 ![ex7](https://github.com/renjunxiang/Text-Classification/blob/master/picture/demo_score_2.png)
 
-### 监督学习+打标签的范例：demo_topic_score.py
+### 机器监督学习+打标签的范例：demo_topic_score.py
 读取数据集NLP\data\，关键词：keyword.json，训练集train_data.json<br>，名称的配置文件config.py。然后通过supervised_classify.py对每个主题进行机器学习，再对每条文本打分。<br>
 因为没有数据，我自己随便造了几句，训练效果马马虎虎~
 ![ex8](https://github.com/renjunxiang/Text-Classification/blob/master/picture/文本分类+打标签.png)
+
+### LSTM的范例：demo_LSTM.py
+读取数据集data\demo_score\data.xlsx，通过neural_LSTM.py构建LSTM网络并训练，调用keras_log_plot.py可视化训练过程。<br>
+![demo_LSTM](https://github.com/renjunxiang/Text-Classification/blob/master/picture/demo_LSTM.png)
+
+### Conv1D的范例：demo_Conv1D.py
+读取数据集data\demo_score\data.xlsx，通过neural_Conv1D.py构建Conv1D网络并训练，调用keras_log_plot.py可视化训练过程。<br>
+![demo_LSTM](https://github.com/renjunxiang/Text-Classification/blob/master/picture/demo_Conv1D.png)
 
 
 

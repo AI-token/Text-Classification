@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from models.supervised_classify import sklearn_supervised
+from models.sklearn_supervised import sklearn_supervised
 from sklearn.model_selection import train_test_split
 
 # 读取正负面标签数据

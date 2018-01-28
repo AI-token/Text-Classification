@@ -38,13 +38,12 @@ model = neural_Conv1D(input_shape=data_transform.shape[-2:],
                       lr=0.001)
 
 history=History()
-model.fit(train_data, train_label, batch_size=50, epochs=20, verbose=2,
+model.fit(train_data, train_label, batch_size=100, epochs=10, verbose=2,
           validation_data=(test_data, test_label), callbacks=[history])
-
-# model.save('ppp.h5')
-# from keras.models import load_model
-# model_new=load_model('ppp.h5')
 
 train_log=pd.DataFrame(history.history)
 keras_log_plot(train_log)
 
+# model.save('ppp.h5')
+# from keras.models import load_model
+# model_new=load_model('ppp.h5')
