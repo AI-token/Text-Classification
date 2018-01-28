@@ -387,11 +387,11 @@ print('topic_recommend_word\n', topic_word)
 ![ex8](https://github.com/renjunxiang/Text-Classification/blob/master/picture/文本分类+打标签.png)
 
 ### LSTM的范例：demo_LSTM.py
-读取数据集data\demo_score\data.xlsx，通过neural_LSTM.py构建LSTM网络并训练，调用keras_log_plot.py可视化训练过程。<br>
+读取数据集data\demo_score\data.xlsx，通过neural_LSTM.py构建LSTM网络并训练（epoch=10），调用keras_log_plot.py可视化训练过程。<br>
 ![demo_LSTM](https://github.com/renjunxiang/Text-Classification/blob/master/picture/demo_LSTM.png)
 
 ### Conv1D的范例：demo_Conv1D.py
-读取数据集data\demo_score\data.xlsx，通过neural_Conv1D.py构建Conv1D网络并训练，调用keras_log_plot.py可视化训练过程。<br>
+读取数据集data\demo_score\data.xlsx，通过neural_Conv1D.py构建Conv1D网络并训练（epoch=10），调用keras_log_plot.py可视化训练过程。<br>
 ![demo_LSTM](https://github.com/renjunxiang/Text-Classification/blob/master/picture/demo_Conv1D.png)
 
 
