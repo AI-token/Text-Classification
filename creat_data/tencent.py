@@ -39,7 +39,9 @@ def creat_label(texts,
                 AppKey=AppKey):
     '''
     :param texts: 需要打标签的文档列表
-    :return: 打好标签的列表，包括原始文档、标签、置信水平
+    :param AppID: 腾讯ai账号信息，默认调用配置文件id_1
+    :param AppKey: 腾讯ai账号信息，默认调用配置文件id_1
+    :return: 打好标签的列表，包括原始文档、标签、置信水平、是否成功
     '''
 
     url = tencent['api']['nlp_textpolar']['url']

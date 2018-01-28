@@ -5,18 +5,29 @@ import numpy as np
 import json
 import requests
 
+APP_ID = baidu['account']['id_1']['APP_ID']
+API_KEY = baidu['account']['id_1']['API_KEY']
+SECRET_KEY = baidu['account']['id_1']['SECRET_KEY']
+
 
 # 逐句调用接口判断
-def creat_label(texts, interface='SDK'):
+def creat_label(texts,
+                interface='SDK',
+                APP_ID=APP_ID,
+                API_KEY=API_KEY,
+                SECRET_KEY=SECRET_KEY):
     '''
     :param texts: 需要打标签的文档列表
     :param interface: 接口方式，SDK和API
-    :return: 打好标签的列表，包括原始文档、标签、置信水平、正负面概率
+    :param APP_ID: 百度ai账号信息，默认调用配置文件id_1
+    :param API_KEY: 百度ai账号信息，默认调用配置文件id_1
+    :param SECRET_KEY: 百度ai账号信息，默认调用配置文件id_1
+    :return: 打好标签的列表，包括原始文档、标签、置信水平、正负面概率、是否成功
     '''
     # 创建连接
-    client = AipNlp(baidu['account']['id_1']['APP_ID'],
-                    baidu['account']['id_1']['API_KEY'],
-                    baidu['account']['id_1']['SECRET_KEY'])
+    client = AipNlp(APP_ID=APP_ID,
+                    API_KEY=API_KEY,
+                    SECRET_KEY=SECRET_KEY)
     results = []
     if interface == 'SDK':
         for one_text in texts:
@@ -100,5 +111,5 @@ if __name__ == '__main__':
                                              'msg'])
     results['label'] = np.where(results['label'] == 2,
                                 '正面',
-                                np.where(results['label'] == 1, '中性', '负面') )
+                                np.where(results['label'] == 1, '中性', '负面'))
     print(results)

@@ -24,31 +24,84 @@ keras=2.1.1<br>
 ### 利用百度AI打标签：baidu.py
 API和SDK两种方式。<br>
 ``` python
-# creat_label(texts, interface='SDK')
+# creat_label(texts,
+#             interface='SDK',
+#             APP_ID=APP_ID,
+#             API_KEY=API_KEY,
+#             SECRET_KEY=SECRET_KEY)
+
 
 # texts: 需要打标签的文档列表
 # interface: 接口方式，SDK和API
+# APP_ID: 百度ai账号信息，默认调用配置文件id_1
+# API_KEY: 百度ai账号信息，默认调用配置文件id_1
+# SECRET_KEY: 百度ai账号信息，默认调用配置文件id_1
 # return: 打好标签的列表，包括原始文档、标签、置信水平、正负面概率
 
 from creat_data.baidu import creat_label
+import pandas as pd
+import numpy as np
 
 results = creat_label(texts=['价格便宜啦，比原来优惠多了',
                              '壁挂效果差，果然一分价钱一分货',
                              '东西一般般，诶呀',
                              '快递非常快，电视很惊艳，非常喜欢',
-                             '到货很快，师傅很热情专业。'
+                             '到货很快，师傅很热情专业。',
+                             '讨厌你',
+                             '一般'
                              ],
                       interface='SDK')
 results = pd.DataFrame(results, columns=['evaluation',
                                          'label',
                                          'confidence',
                                          'positive_prob',
-                                         'negative_prob'])
-results['label'] = np.where(results['label'] == 2, '正面', '负面')
+                                         'negative_prob',
+                                         'ret',
+                                         'msg'])
+results['label'] = np.where(results['label'] == 2,
+                            '正面',
+                            np.where(results['label'] == 1, '中性', '负面'))
 print(results)
-print(result)
+
 ```
 ![baidu](https://github.com/renjunxiang/Text-Classification/blob/master/picture/baidu.png)
+
+### 利用腾讯AI打标签：tencent.py
+API方式。<br>
+``` python
+# creat_label(texts,
+#             AppID=AppID,
+#             AppKey=AppKey)
+
+
+# texts: 需要打标签的文档列表
+# AppID: 腾讯ai账号信息，默认调用配置文件id_1
+# AppKey: 腾讯ai账号信息，默认调用配置文件id_1
+# return: 打好标签的列表，包括原始文档、标签、置信水平、正负面概率
+
+from creat_data.tencent import creat_label
+import pandas as pd
+import numpy as np
+
+results = creat_label(texts=['价格便宜啦，比原来优惠多了',
+                             '壁挂效果差，果然一分价钱一分货',
+                             '东西一般般，诶呀',
+                             '快递非常快，电视很惊艳，非常喜欢',
+                             '到货很快，师傅很热情专业。',
+                             '讨厌你',
+                             '一般'
+                             ])
+results = pd.DataFrame(results, columns=['evaluation',
+                                         'label',
+                                         'confidence',
+                                         'ret',
+                                         'msg'])
+results['label'] = np.where(results['label'] == 1, '正面',
+                            np.where(results['label'] == 0, '中性', '负面'))
+print(results)
+
+```
+![tencent](https://github.com/renjunxiang/Text-Classification/blob/master/picture/tencent.png)
 
 ## 文本预处理 sentence_transform
 ### 文本转tokenizer编码：sentence_2_tokenizer.py
