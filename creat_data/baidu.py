@@ -21,12 +21,24 @@ def creat_label(texts, interface='SDK'):
     if interface == 'SDK':
         for one_text in texts:
             result = client.sentimentClassify(one_text)
-            results.append([one_text,
-                            result['items'][0]['sentiment'],
-                            result['items'][0]['confidence'],
-                            result['items'][0]['positive_prob'],
-                            result['items'][0]['negative_prob']
-                            ])
+            if 'error_code' in result:
+                results.append([one_text,
+                                0,
+                                0,
+                                0,
+                                0,
+                                result['error_code'],
+                                result['error_msg']
+                                ])
+            else:
+                results.append([one_text,
+                                result['items'][0]['sentiment'],
+                                result['items'][0]['confidence'],
+                                result['items'][0]['positive_prob'],
+                                result['items'][0]['negative_prob'],
+                                0,
+                                'ok'
+                                ])
     elif interface == 'API':
         # 获取access_token
         url = baidu['access_token_url']
@@ -46,18 +58,24 @@ def creat_label(texts, interface='SDK'):
                               headers=headers,
                               data=data)
             result = json.loads(r.text)
-            results.append([one_text,
-                            result['items'][0]['sentiment'],
-                            result['items'][0]['confidence'],
-                            result['items'][0]['positive_prob'],
-                            result['items'][0]['negative_prob']
-                            ])
-
-        # 逐句调用接口判断
-
-        data = json.dumps({'text': '价格便宜啦，比原来优惠多了'})
-        r = requests.post(url=url, params=params, headers=headers, data=data)
-        result = json.loads(r.text)
+            if 'error_code' in result:
+                results.append([one_text,
+                                0,
+                                0,
+                                0,
+                                0,
+                                result['error_code'],
+                                result['error_msg']
+                                ])
+            else:
+                results.append([one_text,
+                                result['items'][0]['sentiment'],
+                                result['items'][0]['confidence'],
+                                result['items'][0]['positive_prob'],
+                                result['items'][0]['negative_prob'],
+                                0,
+                                'ok'
+                                ])
     else:
         print('ERROR: No interface named %s' % (interface))
     return results
@@ -69,14 +87,18 @@ if __name__ == '__main__':
                                  '东西一般般，诶呀',
                                  '快递非常快，电视很惊艳，非常喜欢',
                                  '到货很快，师傅很热情专业。',
-                                 '讨厌你'
+                                 '讨厌你',
+                                 '一般'
                                  ],
                           interface='SDK')
     results = pd.DataFrame(results, columns=['evaluation',
                                              'label',
                                              'confidence',
                                              'positive_prob',
-                                             'negative_prob'])
-    results['label'] = np.where(results['label'] == 2,'正面',
+                                             'negative_prob',
+                                             'ret',
+                                             'msg'])
+    results['label'] = np.where(results['label'] == 2,
+                                '正面',
                                 np.where(results['label'] == 1, '中性', '负面') )
     print(results)
