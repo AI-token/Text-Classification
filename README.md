@@ -37,7 +37,7 @@ API和SDK两种方式。<br>
 # APP_ID: 百度ai账号信息，默认调用配置文件id_1
 # API_KEY: 百度ai账号信息，默认调用配置文件id_1
 # SECRET_KEY: 百度ai账号信息，默认调用配置文件id_1
-# return: 打好标签的列表，包括原始文档、标签、置信水平、正负面概率
+# return: 打好标签的列表，包括原始文档、标签、置信水平、正负面概率、是否错误
 
 from creat_data.baidu import creat_label
 import pandas as pd
@@ -67,6 +67,46 @@ print(results)
 ```
 ![baidu](https://github.com/renjunxiang/Text-Classification/blob/master/picture/baidu.png)
 
+### 利用阿里云打标签：ali.py
+API方式。<br>
+``` python
+# creat_label(texts,
+#             org_code=org_code,
+#             akID=akID,
+#             akSecret=akSecret)
+
+
+
+# texts: 需要打标签的文档列表
+# org_code: 阿里云账号信息，默认调用配置文件id_1
+# akID: 阿里云账号信息，默认调用配置文件id_1
+# akSecret: 阿里云账号信息，默认调用配置文件id_1
+# return: 打好标签的列表，包括原始文档、标签、是否错误
+
+from creat_data.ali import creat_label
+import pandas as pd
+import numpy as np
+
+results = creat_label(texts=['价格便宜啦，比原来优惠多了',
+                             '壁挂效果差，果然一分价钱一分货',
+                             '东西一般般，诶呀',
+                             '快递非常快，电视很惊艳，非常喜欢',
+                             '到货很快，师傅很热情专业。',
+                             '讨厌你',
+                             '一般'
+                             ])
+results = pd.DataFrame(results, columns=['evaluation',
+                                         'label',
+                                         'ret',
+                                         'msg'])
+results['label'] = np.where(results['label'] == '1', '正面',
+                            np.where(results['label'] == '0', '中性',
+                                     np.where(results['label'] == '-1', '负面', '非法')))
+print(results)
+
+```
+![ali](https://github.com/renjunxiang/Text-Classification/blob/master/picture/ali.png)
+
 ### 利用腾讯AI打标签：tencent.py
 API方式。<br>
 ``` python
@@ -78,7 +118,7 @@ API方式。<br>
 # texts: 需要打标签的文档列表
 # AppID: 腾讯ai账号信息，默认调用配置文件id_1
 # AppKey: 腾讯ai账号信息，默认调用配置文件id_1
-# return: 打好标签的列表，包括原始文档、标签、置信水平、正负面概率
+# return: 打好标签的列表，包括原始文档、标签、置信水平、正负面概率、是否错误
 
 from creat_data.tencent import creat_label
 import pandas as pd
