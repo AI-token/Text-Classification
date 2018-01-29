@@ -68,14 +68,12 @@ print(results)
 ![baidu](https://github.com/renjunxiang/Text-Classification/blob/master/picture/baidu.png)
 
 ### 利用阿里云打标签：ali.py
-API方式。<br>
+API方式。官方仅给了py2.7版本，和py3.5出入很大，因此重写。<br>
 ``` python
 # creat_label(texts,
 #             org_code=org_code,
 #             akID=akID,
 #             akSecret=akSecret)
-
-
 
 # texts: 需要打标签的文档列表
 # org_code: 阿里云账号信息，默认调用配置文件id_1
