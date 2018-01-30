@@ -20,7 +20,8 @@ def neural_LSTM(input_shape,
     model.add(Masking(mask_value=0, input_shape=input_shape))
     #增加LSTM层
     model.add(LSTM(units=net_shape[0],
-                   activation='relu',
+                   activation='tanh',
+                   recurrent_activation='hard_sigmoid',
                    implementation=1,
                    dropout=0.2,
                    kernel_initializer=initializers.normal(stddev=0.1),

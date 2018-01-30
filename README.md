@@ -314,6 +314,48 @@ print('test\n', result)
 ```
 ![ex3](https://github.com/renjunxiang/Text-Classification/blob/master/picture/文本分类.png)
 
+### 常用层封装：neural_bulit.py
+keras的LSTM、Dense、Conv1D封装。<br>
+``` python
+# neural_bulit(net_shape,
+#              optimizer_name='Adagrad',
+#              lr=0.001,
+#              loss='categorical_crossentropy')
+
+
+# net_shape: 神经网络格式
+# optimizer_name: 优化器
+# lr: 学习率
+# loss: 损失函数
+# return: 返回神经网络模型
+
+from models.neural_bulit import neural_bulit
+
+net_shape = [{'name': 'InputLayer',
+              'input_shape': [10, 5],
+              },
+             {'name': 'Conv1D'
+              },
+             {'name': 'MaxPooling1D'
+              },
+             {'name': 'Flatten'
+              },
+             {'name': 'Dense'
+              },
+             {'name': 'Dropout'
+              },
+             {'name': 'softmax'
+              }
+             ]
+model = neural_bulit(net_shape=net_shape,
+                     optimizer_name='Adagrad',
+                     lr=0.001,
+                     loss='categorical_crossentropy')
+model.summary()
+
+```
+![neural_bulit](https://github.com/renjunxiang/Text-Classification/blob/master/picture/neural_bulit.png)
+
 ### LSTM：neural_LSTM.py
 keras的LSTM简单封装。<br>
 ``` python

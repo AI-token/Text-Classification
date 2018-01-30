@@ -1,6 +1,6 @@
 from keras.models import Sequential
 from keras.layers.core import Dense, initializers, Flatten
-from keras.layers import Conv1D
+from keras.layers import Conv1D,InputLayer
 from keras.layers.pooling import MaxPooling1D
 from models.parameter.optimizers import optimizers
 
@@ -25,8 +25,8 @@ def neural_Conv1D(input_shape,
     # 增加Conv1D层
 
     for n in range(len(net_conv_num)):
-        model.add(Conv1D(input_shape=input_shape,
-                         filters=net_conv_num[n],  # 卷积核数量
+        model.add(InputLayer(input_shape=input_shape))
+        model.add(Conv1D(filters=net_conv_num[n],  # 卷积核数量
                          kernel_size=kernel_size[n],  # 卷积核尺寸，或者[3]
                          strides=1,
                          padding='same',
